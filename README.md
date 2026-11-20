@@ -1,46 +1,107 @@
-# Robot Car — Interactive 3D Showcase
+# Arduino Bluetooth Robot Car — Interactive 3D Showcase
 
-A dark, cinematic, responsive website inspired by the uploaded reference video. It displays the supplied robot-car GLB in a Three.js studio scene.
+A dark, cinematic, Apple-inspired 3D product showcase for an Arduino 4WD Bluetooth robotics platform. Built with **Three.js**, **GSAP ScrollTrigger**, and **Lenis** smooth scroll, configured via modular data-driven storyboards.
 
-## Included
+---
 
-- `index.html` — website and interactive 3D viewer
-- `assets/robot-car.glb` — robot car model used by the site
+## Architecture Overview
 
-## Run locally
+The site is built as a **data-driven storyboard**:
+- `src/sections.js` — Single source of truth for the 8 keyframes in the 3D scroll sequence (camera coordinates, targeted meshes, highlight shaders, and exploded view offsets).
+- `src/team.js` — Single source of truth for the engineering team and institutional credits. Adding or updating a student requires only editing one line without touching any HTML.
+- `src/ui.js` — Builds the frosted glass HUD cards, interactive 2S2P battery topology diagram, specs matrix, team grid, and institutional credits strip.
+- `src/timeline.js` — Master GSAP scrub timeline controlling camera interpolation, part opacity, and exploded transformations.
+- `src/scene.js` & `src/loadModel.js` — Studio lighting, environment map, material tuning, and GLTF model loading.
 
-The page loads the GLB with JavaScript modules, so open it through a local web server rather than double-clicking `index.html`.
+---
 
-### Option A — Python
+## Getting Started
 
-1. Extract the ZIP file.
-2. Open a terminal in the extracted `robot-car-showcase` folder.
-3. Run:
+### Prerequisites
 
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- `npm`
+
+### Installation & Local Development
+
+1. Clone or extract the repository:
    ```bash
-   python -m http.server 8000
+   cd robot-car-showcase
    ```
 
-4. Open `http://localhost:8000` in Chrome or Edge.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### Option B — Visual Studio Code
+3. Launch the local development server:
+   ```bash
+   npm run dev
+   ```
 
-1. Open the extracted folder in VS Code.
-2. Install the **Live Server** extension if it is not already installed.
-3. Right-click `index.html` and choose **Open with Live Server**.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Controls
+---
 
-- Drag with mouse or finger: rotate the model
-- Scroll / pinch: zoom
-- `3/4`, `S`, `F`, `T`: switch camera views
-- `+` / `−`: zoom in or out
-- `↺`: reset camera
-- `Pause` / `Rotate`: stop or resume automatic rotation
-- `Details`: open the component breakdown panel
+## Production Build & Deployment
 
-## Notes
+To compile an optimized static production bundle:
 
-- Three.js modules are loaded from jsDelivr, and fonts from Google Fonts, so an internet connection is required when viewing the site unless those dependencies are downloaded and hosted locally.
-- The model itself is stored locally in `assets/robot-car.glb`.
-- The GLB is displayed as provided; the viewer does not alter its geometry.
+```bash
+npm run build
+```
+
+The output will be generated in `dist/`. You can preview the production bundle locally:
+
+```bash
+npm run preview
+```
+
+### Deploying to Vercel or Netlify
+- **Build command**: `npm run build`
+- **Publish directory**: `dist`
+
+> **Note on Sharing / Archiving**: When zipping or sharing the repository, exclude `node_modules/` and `.git/`. Running `npm install` automatically rebuilds all required packages.
+
+---
+
+## Customizing Team & Institutional Credits
+
+Open [`src/team.js`](file:///home/muhammad/Downloads/robot-car-showcase/src/team.js):
+
+```javascript
+export const teamMembers = [
+  {
+    name: 'Student Name',
+    role: 'Lead Systems & Hardware',
+    contribution: 'Chassis design and power bus integration',
+    photo: '/team/member-1.webp', // or leave blank for initials fallback
+  },
+  // Add additional members here...
+];
+
+export const projectCredits = {
+  institution: 'Sukkur IBA University',
+  course: 'Robotics & Autonomous Systems Capstone',
+  supervisor: 'Faculty Project Supervisor',
+  logos: [
+    { name: 'Sukkur IBA University', src: '/institute-logo/iba-university.png', alt: 'Sukkur IBA Logo' },
+    { name: 'Public School Sukkur', src: '/institute-logo/public-school.png', alt: 'Public School Sukkur Logo' },
+  ],
+};
+```
+
+---
+
+## Showcase Sections
+
+| Section | Focus Component | Description |
+| :--- | :--- | :--- |
+| **01** | Platform Overview | Hero camera overview of the complete 4WD chassis |
+| **02** | Arduino Uno | ATmega328P microcontroller & real-time PWM control |
+| **03** | HC-05 Module | 2.4 GHz wireless telemetry & SPP serial protocol |
+| **04** | L298N Driver | High-current dual H-bridge motor switching |
+| **05** | 18650 Battery Array | 7.4V 2S2P lithium power with interactive topology diagram |
+| **06** | Quad DC Motors | 4WD differential traction and exploded drivetrain view |
+| **07** | Specifications Matrix | Complete electrical and mechanical architecture |
+| **08** | Engineering Team | Student contributors, supervisor, and partner institute logos |

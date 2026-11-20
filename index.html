@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arduino Bluetooth Robot Car — Interactive 3D Showcase</title>
     <meta name="description" content="A scroll-driven 3D product showcase for an Arduino Bluetooth car featuring high-precision telemetry, dual H-bridge motor driver, and 7.4V lithium power." />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 
     <!-- Google Fonts for Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +17,10 @@
   <body>
     <!-- Apple-style Minimalist Loading Screen -->
     <div id="loading-overlay" role="status" aria-live="polite">
-      <div class="loader-brand">Arduino Robotics</div>
+      <div class="loader-brand">
+        <img src="/logo.svg" alt="Project Logo" class="loader-logo" width="48" height="48" />
+        <span>Arduino Robotics</span>
+      </div>
       <div class="loading-bar-track">
         <div id="loading-bar"></div>
       </div>
@@ -31,11 +35,12 @@
     <!-- Fixed Header HUD -->
     <header class="top-header" role="banner">
       <div class="header-brand">
+        <img src="/logo.svg" alt="Logo" class="brand-logo" width="22" height="22" />
         <span class="brand-dot" aria-hidden="true"></span>
         <span class="brand-title">Arduino Uno 4WD</span>
       </div>
       <div class="header-counter" id="active-section-number" aria-live="polite">
-        01 / 07
+        01 / 08
       </div>
     </header>
 

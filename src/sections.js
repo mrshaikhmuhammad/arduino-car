@@ -99,4 +99,16 @@ export const sections = [
     highlight: [],
     explode: false,
   },
+  {
+    id: 'team',
+    eyebrow: 'ENGINEERING CONTRIBUTORS',
+    title: 'The Team Behind the Robot.',
+    copy: 'Engineered from raw silicon, acrylic chassis decks, and differential drive gearmotors by our student robotics cohort.',
+    badge: 'Hardware Engineering • Firmware • Power Systems • Telemetry',
+    targetMesh: null,
+    cameraPosition: { x: 2.2, y: 1.3, z: 2.2 },
+    cameraLookAt: { x: 0.0, y: 0.2, z: 0.0 },
+    highlight: [],
+    explode: false,
+  },
 ];

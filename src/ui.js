@@ -5,6 +5,7 @@
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { teamMembers, projectCredits } from './team.js';
 
 export function buildUI(sections) {
   const scrollContainer = document.getElementById('scroll-container');
@@ -24,8 +25,8 @@ export function buildUI(sections) {
     secEl.id = `section-${sec.id}`;
     secEl.dataset.index = idx;
 
-    // Card alignment layout (alternating left / right for cinematic Apple pacing)
-    const alignClass = idx === 0 ? 'align-center' : idx % 2 === 1 ? 'align-left' : 'align-right';
+    // Card alignment layout (hero and team are centered; alternating left/right for middle story sections)
+    const alignClass = (idx === 0 || sec.id === 'team') ? 'align-center team-section-content' : idx % 2 === 1 ? 'align-left' : 'align-right';
 
     let extraContent = '';
 
@@ -113,6 +114,61 @@ export function buildUI(sections) {
             <div class="spec-value">Dual Acrylic Deck</div>
             <div class="spec-detail">Modular Mounting Grid • Brass Vibration Standoffs</div>
           </div>
+        </div>
+      `;
+    }
+
+    // Team and Institutional Credits section
+    if (sec.id === 'team') {
+      const teamCards = teamMembers.map(member => `
+        <div class="spec-card team-card">
+          ${member.photo ? `
+            <div class="team-photo-wrap">
+              <img src="${member.photo}" alt="${member.name}" class="team-photo" loading="lazy" width="60" height="60" />
+            </div>
+          ` : `
+            <div class="team-photo-placeholder" aria-hidden="true">
+              ${member.name.split(' ').map(n => n[0]).slice(0, 2).join('')}
+            </div>
+          `}
+          <div class="team-card-content">
+            <div class="spec-label">${member.role}</div>
+            <div class="spec-value">${member.name}</div>
+            <div class="spec-detail">${member.contribution}</div>
+          </div>
+        </div>
+      `).join('');
+
+      const logosHtml = (projectCredits.logos || []).map(logo => `
+        <div class="credit-logo-box" title="${logo.name}">
+          <img src="${logo.src}" alt="${logo.alt}" class="credit-logo" loading="lazy" />
+        </div>
+      `).join('');
+
+      extraContent = `
+        <div class="specs-grid team-grid">
+          ${teamCards}
+        </div>
+        <div class="credits-card">
+          <div class="credits-meta">
+            <div class="credit-item">
+              <span class="credit-label">Course / Program</span>
+              <span class="credit-val">${projectCredits.course}</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">Academic Institution</span>
+              <span class="credit-val">${projectCredits.institution}</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-label">Faculty Supervisor</span>
+              <span class="credit-val">${projectCredits.supervisor}</span>
+            </div>
+          </div>
+          ${logosHtml ? `
+            <div class="credits-logos-strip">
+              ${logosHtml}
+            </div>
+          ` : ''}
         </div>
       `;
     }

@@ -49,8 +49,19 @@ html, body {
   pointer-events: none;
 }
 
+.loader-logo {
+  width: clamp(44px, 6vw, 60px);
+  height: clamp(44px, 6vw, 60px);
+  margin-bottom: 1.25rem;
+  opacity: 1;
+  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.6));
+}
+
 .loader-brand {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -118,6 +129,20 @@ html, body {
   align-items: center;
   gap: 0.75rem;
   pointer-events: auto;
+}
+
+.brand-logo {
+  width: clamp(22px, 3vw, 26px);
+  height: clamp(22px, 3vw, 26px);
+  opacity: 1;
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.6));
+  flex-shrink: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.8));
 }
 
 .brand-dot {
@@ -435,6 +460,155 @@ html, body {
   line-height: 1.4;
 }
 
+/* Team Section & Cards */
+.team-section-content {
+  max-width: min(920px, 92vw);
+}
+
+.team-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.team-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: left;
+  padding: 1.15rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+}
+
+.team-photo-wrap {
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.team-photo-placeholder {
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(41, 151, 255, 0.2), rgba(56, 189, 248, 0.1));
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+}
+
+.team-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Credits Strip & Institutional Logos (M4) */
+.credits-card {
+  margin-top: 2rem;
+  padding: 1.5rem 1.75rem;
+  background: rgba(12, 12, 18, 0.65);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.credits-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.credit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.credit-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.credit-val {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.credits-logos-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.credit-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.credit-logo-box:hover {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.credit-logo {
+  height: clamp(34px, 4vw, 44px);
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  opacity: 1;
+  filter: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.credit-logo-box:hover .credit-logo {
+  transform: scale(1.05);
+}
+
 /* Scroll Cue Chevron on Hero */
 .scroll-cue {
   margin-top: 2rem;
@@ -462,6 +636,28 @@ html, body {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+  .top-header {
+    padding: 0 1.25rem;
+  }
+
+  .header-brand {
+    gap: 0.5rem;
+  }
+
+  .brand-title {
+    font-size: 0.85rem;
+  }
+
+  .brand-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header-counter {
+    font-size: 0.78rem;
+    padding: 0.25rem 0.65rem;
+  }
+
   .story-section {
     min-height: 140vh;
     padding: 0 1.25rem;
@@ -482,8 +678,16 @@ html, body {
     display: none;
   }
 
-  .specs-grid {
+  .specs-grid, .team-grid {
     grid-template-columns: 1fr;
+  }
+
+  .credits-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .credits-logos-strip {
+    gap: 1rem;
   }
 }
 
