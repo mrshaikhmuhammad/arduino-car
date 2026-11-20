@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arduino Bluetooth Robot Car — Interactive 3D Showcase</title>
+    <meta name="description" content="A scroll-driven 3D product showcase for an Arduino Bluetooth car featuring high-precision telemetry, dual H-bridge motor driver, and 7.4V lithium power." />
+
+    <!-- Google Fonts for Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Apple-style Minimalist Loading Screen -->
+    <div id="loading-overlay" role="status" aria-live="polite">
+      <div class="loader-brand">Arduino Robotics</div>
+      <div class="loading-bar-track">
+        <div id="loading-bar"></div>
+      </div>
+      <div class="loading-status">
+        Loading 3D Hardware Telemetry... <span id="loading-percent">0%</span>
+      </div>
+    </div>
+
+    <!-- Top Sticky Progress Bar -->
+    <div id="progress-line" aria-hidden="true"></div>
+
+    <!-- Fixed Header HUD -->
+    <header class="top-header" role="banner">
+      <div class="header-brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-title">Arduino Uno 4WD</span>
+      </div>
+      <div class="header-counter" id="active-section-number" aria-live="polite">
+        01 / 07
+      </div>
+    </header>
+
+    <!-- Right Edge Navigation Dots -->
+    <nav id="nav-dots" aria-label="Section navigation"></nav>
+
+    <!-- Three.js Sticky Viewport Canvas -->
+    <div id="webgl-container" aria-hidden="true"></div>
+
+    <!-- Scroll Track & Story Sections (Dynamically populated from sections.js) -->
+    <main id="scroll-container" role="main"></main>
+
+    <!-- Application Script Entry Point -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
