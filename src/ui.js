@@ -121,7 +121,7 @@ export function buildUI(sections) {
     // Team and Institutional Credits section
     if (sec.id === 'team') {
       const teamCards = teamMembers.map(member => `
-        <div class="spec-card team-card">
+        <div class="spec-card team-card ${member.isLead ? 'team-card-lead' : ''}">
           ${member.photo ? `
             <div class="team-photo-wrap">
               <img src="${member.photo}" alt="${member.name}" class="team-photo" loading="lazy" width="60" height="60" />
@@ -132,7 +132,10 @@ export function buildUI(sections) {
             </div>
           `}
           <div class="team-card-content">
-            <div class="spec-label">${member.role}</div>
+            <div class="team-role-wrap">
+              <span class="spec-label">${member.role}</span>
+              ${member.isLead ? `<span class="lead-badge">Team Lead</span>` : ''}
+            </div>
             <div class="spec-value">${member.name}</div>
             <div class="spec-detail">${member.contribution}</div>
           </div>
@@ -150,6 +153,31 @@ export function buildUI(sections) {
           ${teamCards}
         </div>
         <div class="credits-card">
+          <div class="credits-leadership-strip">
+            ${projectCredits.principal ? `
+              <div class="leadership-card">
+                <div class="leadership-photo-wrap">
+                  <img src="${projectCredits.principal.photo}" alt="${projectCredits.principal.name}" class="leadership-photo" loading="lazy" width="64" height="64" />
+                </div>
+                <div class="leadership-content">
+                  <span class="credit-label">Institutional Patron</span>
+                  <div class="leadership-name">${projectCredits.principal.name}</div>
+                  <div class="leadership-role">${projectCredits.principal.institution || projectCredits.institution}</div>
+                </div>
+              </div>
+            ` : ''}
+            <div class="leadership-card">
+              <div class="leadership-photo-wrap">
+                <img src="${projectCredits.supervisorPhoto || '/team/member-5.webp'}" alt="${projectCredits.supervisor}" class="leadership-photo" loading="lazy" width="64" height="64" />
+              </div>
+              <div class="leadership-content">
+                <span class="credit-label">${projectCredits.supervisorRole || 'Faculty Supervisor'}</span>
+                <div class="leadership-name">${projectCredits.supervisor}</div>
+                <div class="leadership-role">${projectCredits.institution}</div>
+              </div>
+            </div>
+          </div>
+
           <div class="credits-meta">
             <div class="credit-item">
               <span class="credit-label">Course / Program</span>
@@ -160,8 +188,8 @@ export function buildUI(sections) {
               <span class="credit-val">${projectCredits.institution}</span>
             </div>
             <div class="credit-item">
-              <span class="credit-label">Faculty Supervisor</span>
-              <span class="credit-val">${projectCredits.supervisor}</span>
+              <span class="credit-label">Affiliated Partner</span>
+              <span class="credit-val">${projectCredits.partner || 'Sukkur IBA University'}</span>
             </div>
           </div>
           ${logosHtml ? `
